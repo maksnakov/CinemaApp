@@ -52,7 +52,7 @@ public class Test {
 
     public static void main(String[] args) throws NoSuchSeatException, NoSuchFilmException {
 
-        CinemaRB cinemaMir = new CinemaRB("MIR", new Admin("Vlad", "Pro"), new Staff(new Director("Vasya", "Sidorov"), new Cassir("Elena", "Ivanova")), seats(30), films());
+        CinemaRB cinemaMir = new CinemaRB("MIR", new Admin("Vlad", "Prokov"), new Staff(new Director("Vasya", "Sidorov"), new Cassir("Elena", "Ivanova")), seats(30), films());
 
         CinemaRB cinemaPobeda = new CinemaRB("Pobeda", cinemaMir.getAdmin(), new Staff(new Director("Petya", "Petrov"), new Cassir("Ira", "Smirnova")), seats(25), films());
 
@@ -76,17 +76,17 @@ public class Test {
 
         String name = input.nextLine();
         Client client = new Client(name);
-        System.out.println(String.format("Dear %s choose film you want to watch: ", client.getName()));
+        System.out.println(String.format("Dear %s choose a film you want to watch: ", client.getName()));
         AtomicInteger i = new AtomicInteger();
         cinemaMir.getFilms().forEach(e -> System.out.println(i.getAndIncrement() + ", " + e.getFilmName() + ", " + e.getGenre()));
         Film filmNumber = filmNumber(input, cinemaMir.getFilms());
 
-        System.out.println("Выберите место для сидения: \n");
+        System.out.println("Choose a seat for watching: \n");
         List<Integer> seatNumbers = cinemaMir.getSeatNumbers();
         cinemaMir.getSeatNumbers().forEach(e -> System.out.print(e + ", "));
         Integer seatNumber = seatNumber(input, seatNumbers);
 
-        System.out.println("Введите удобное для вас время сеанса: ");
+        System.out.println("Choose a convenient time for watching: ");
         Film film = cinemaMir.getFilms().stream().filter(e -> e.equals(filmNumber)).findFirst().get();
         AtomicInteger i1 = new AtomicInteger(1);
         film.getTimes().forEach(e -> System.out.println(i1.getAndIncrement() + ", " + e.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))));
