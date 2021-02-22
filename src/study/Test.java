@@ -81,12 +81,12 @@ public class Test {
         cinemaMir.getFilms().forEach(e -> System.out.println(i.getAndIncrement() + ", " + e.getFilmName() + ", " + e.getGenre()));
         Film filmNumber = filmNumber(input, cinemaMir.getFilms());
 
-        System.out.println("Choose a seat for watching: \n");
+        System.out.println("Choose the seat for watching: \n");
         List<Integer> seatNumbers = cinemaMir.getSeatNumbers();
         cinemaMir.getSeatNumbers().forEach(e -> System.out.print(e + ", "));
         Integer seatNumber = seatNumber(input, seatNumbers);
 
-        System.out.println("Choose a convenient time for watching: ");
+        System.out.println("Choose the convenient time for watching: ");
         Film film = cinemaMir.getFilms().stream().filter(e -> e.equals(filmNumber)).findFirst().get();
         AtomicInteger i1 = new AtomicInteger(1);
         film.getTimes().forEach(e -> System.out.println(i1.getAndIncrement() + ", " + e.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))));
@@ -96,7 +96,7 @@ public class Test {
 
         Cassir cassirFromCinemaMir = cinemaMir.getStaff().getCassir();
         Ticket newTicket = cassirFromCinemaMir.createNewTicket(cinemaMir, 7.0, filmNumber, seatNumber, time);
-        System.out.println("Кассир выдает билет......");
+        System.out.println("The cashier gives the ticket......");
         cassirFromCinemaMir.addTicketInCinema(cinemaMir, newTicket);
 
         try {
@@ -113,7 +113,7 @@ public class Test {
                 Path file = Files.createFile(directory.resolve(client.getName()+"_"+ random.nextInt(1000) + ".txt"));
                 Files.write(file, newTicket.toString().getBytes(), StandardOpenOption.CREATE);
             }
-            System.out.println("Ваш билет готов!\nСмотрите ваш билет в папке на компе по пути: " + directory.toString());
+            System.out.println("Your ticket is ready!\nIt is in the folder: " + directory.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -126,14 +126,14 @@ public class Test {
         try {
             filmNumber = scanner.nextInt();
             if (filmNumber > 6 || filmNumber < 0) {
-                System.out.println("Фильма с таким номером нет, выберите другой: ");
+                System.out.println("There is no such film! Choose another one: ");
                 return filmNumber(scanner, films);
             }
             int finalFilmNumber = filmNumber;
             return films.stream().filter(e -> e.getFilmName().contains(String.valueOf(finalFilmNumber))).findFirst().get();
         } catch (InputMismatchException e) {
             scanner.next();
-            System.out.println("Вы ввели не число");
+            System.out.println("This is not a number!");
             return filmNumber(scanner, films);
         }
     }
@@ -144,13 +144,13 @@ public class Test {
         try {
             seatNumber = scanner.nextInt();
             if (!seats.contains(seatNumber)) {
-                System.out.println("Свободного места с таким номером нет, выберите другой: ");
+                System.out.println("There is no free seat with this number! Choose another one: ");
                 return seatNumber(scanner, seats);
             }
             return seatNumber;
         } catch (InputMismatchException e) {
             scanner.next();
-            System.out.println("Вы ввели не число");
+            System.out.println("This is not a number!");
             return seatNumber(scanner, seats);
         }
     }
@@ -160,14 +160,14 @@ public class Test {
         try {
             filmTime = scanner.nextInt();
             if (filmTime > times.size() || filmTime <= 0) {
-                System.out.println("Фильма с таким временем сеанса нет, выберите другое: ");
+                System.out.println("There is no film with this time! Choose another one: ");
                 return filmTime(scanner, times);
             }
             if (filmTime == 3) return times.get(filmTime - 1);
             return times.get(filmTime);
         } catch (InputMismatchException e) {
             scanner.next();
-            System.out.println("Вы ввели не число");
+            System.out.println("This is not a number!");
             return filmTime(scanner, times);
         }
     }
