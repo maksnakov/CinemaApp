@@ -1,6 +1,14 @@
 package study.staff;
 
-public class Cassir {
+import study.cinemas.CinemaRB;
+import study.cinemas.Film;
+import study.cinemas.Ticket;
+import study.cinemas.exceptionhandling.NoSuchFilmException;
+import study.cinemas.exceptionhandling.NoSuchSeatException;
+
+import java.time.LocalDateTime;
+
+public class Cassir implements ICassir{
 
     private String name;
     private String surname;
@@ -35,5 +43,15 @@ public class Cassir {
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 '}';
+    }
+
+    @Override
+    public void addTicketInCinema(CinemaRB cinemaRB, Ticket ticket) throws NoSuchSeatException, NoSuchFilmException {
+        cinemaRB.addNewTicket(ticket);
+    }
+
+    @Override
+    public Ticket createNewTicket(CinemaRB cinemaRB, Double cost, Film film, Integer seatNumber, LocalDateTime dateTime) {
+        return new Ticket(cinemaRB, cost, film, seatNumber, dateTime);
     }
 }

@@ -10,9 +10,7 @@ public class Staff {
         this.cassir = cassir;
     }
 
-    public Director getDirector() {
-        return director;
-    }
+    public Director getDirector() { return director; }
 
     public void setDirector(Director director) {
         this.director = director;

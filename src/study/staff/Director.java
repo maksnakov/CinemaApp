@@ -1,13 +1,17 @@
 package study.staff;
 
-public class Director {
+import study.cinemas.CinemaRB;
+import study.cinemas.Film;
+
+public class Director implements IDirector{
+
     private String name;
     private String surname;
 
     public Director() {
     }
 
-    public Director (String name, String surname) {
+    public Director(String name, String surname) {
         this.name = name;
         this.surname = surname;
     }
@@ -34,5 +38,11 @@ public class Director {
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 '}';
+    }
+
+
+    @Override
+    public void addNewFilm(CinemaRB cinemaRB, Film film) {
+        cinemaRB.addNewFilm(film);
     }
 }
